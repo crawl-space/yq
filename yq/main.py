@@ -4,6 +4,9 @@ import sys
 
 from yq.util import command
 
+from yq.command import init
+from yq.command import new
+
 def main(argv):
     c = Yq()
     try:
@@ -20,8 +23,7 @@ class Yq(command.Command):
     usage = "%prog %command"
     description = """yq is quilt for packages."""
 
-#    subCommandClasses = [doap.Doap, cl.ChangeLog, ignore.Ignore, bug.Bug,
-#        code.Code]
+    subCommandClasses = [init.Init, new.New]
 
     def addOptions(self):
         self.parser.add_option('-v', '--version',

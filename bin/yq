@@ -7,7 +7,7 @@ try:
     sys.path.append("/usr/share/yq")
     from yq.main import main
 except ImportError, e:
-    print "fatal: unable to import yq."
+    print "fatal: unable to import yq\n%s" % e
     sys.exit(255)
 
 main(sys.argv[1:])
