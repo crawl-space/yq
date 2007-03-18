@@ -1,0 +1,34 @@
+# vi:si:et:sw=4:sts=4:ts=4
+
+import sys
+
+from yq.util import command
+
+def main(argv):
+    c = Yq()
+    try:
+        ret = c.parse(argv)
+    except SystemError, e:
+        sys.stderr.write('yq: error: %s\n' % e.args)
+        return 255
+
+    if ret is None:
+        return 0
+    return ret
+
+class Yq(command.Command):
+    usage = "%prog %command"
+    description = """yq is quilt for packages."""
+
+#    subCommandClasses = [doap.Doap, cl.ChangeLog, ignore.Ignore, bug.Bug,
+#        code.Code]
+
+    def addOptions(self):
+        self.parser.add_option('-v', '--version',
+                          action="store_true", dest="version",
+                          help="show version information")
+
+    def handleOptions(self, options):
+        if options.version:
+            print "0.0.1"
+            sys.exit(0)

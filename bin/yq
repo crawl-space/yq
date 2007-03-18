@@ -1,0 +1,13 @@
+#!/usr/bin/python
+# vi:si:et:sw=4:sts=4:ts=4
+
+import sys
+
+try:
+    sys.path.append("/usr/share/yq")
+    from yq.main import main
+except ImportError, e:
+    print "fatal: unable to import yq."
+    sys.exit(255)
+
+main(sys.argv[1:])
