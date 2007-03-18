@@ -10,4 +10,19 @@ class Init(command.Command):
         self.options = options
 
     def do(self, args):
-        pass
+        import os
+        import rpm
+
+        os.mkdir("/var/lib/yq")
+        series = open("/var/lib/yq/series", 'w')
+        series.close()
+
+        base = open("/var/lib/yq/base", 'w')
+
+        ts = rpm.TransactionSet()
+        mi = ts.dbMatch()
+
+        for pkg in mi:
+            print >> base, "%s %s %s %s %s" % (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'], pkg['arch'])
+
+        base.close()
