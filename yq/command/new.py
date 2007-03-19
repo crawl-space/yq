@@ -23,5 +23,9 @@ class New(command.Command):
         print >> series, transaction
         series.close()
 
+        status = open("/var/lib/yq/status", 'a')
+        print >> status, transaction
+        status.close()
+
         transaction_file = open(os.path.join("/var/lib/yq/", transaction), 'w')
         transaction_file.close()
