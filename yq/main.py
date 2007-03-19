@@ -8,6 +8,7 @@ from yq.command import init
 from yq.command import new
 from yq.command import refresh
 from yq.command import pop
+from yq.command import push
 
 
 def main(argv):
@@ -26,7 +27,8 @@ class Yq(command.Command):
     usage = "%prog %command"
     description = """yq is quilt for packages."""
 
-    subCommandClasses = [init.Init, new.New, refresh.Refresh, pop.Pop]
+    subCommandClasses = [init.Init, new.New, refresh.Refresh, pop.Pop,
+            push.Push]
 
     def addOptions(self):
         self.parser.add_option('', '--version',
