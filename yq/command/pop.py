@@ -14,8 +14,9 @@ class Pop(command.Command):
         from yum import YumBase
 
         my_yum = YumBase()
-        series = open("/var/lib/yq/status", 'r')
-        for line in series: pass
+        status = open("/var/lib/yq/status", 'r')
+        for line in status: pass
+        status.close()
         transaction_name = line.strip()
         transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'r')
 
@@ -56,10 +57,10 @@ class Pop(command.Command):
 
         #Remove from the series
         #yes, this will eat files and babies
-        series = open("/var/lib/yq/status", 'r')
-        lines = series.readlines()
-        series.close()
-        series = open("/var/lib/yq/status", 'w')
+        status = open("/var/lib/yq/status", 'r')
+        lines = status.readlines()
+        status.close()
+        status = open("/var/lib/yq/status", 'w')
         for line in lines[:-1]:
-            series.write(line)
-        series.close()
+            status.write(line)
+        status.close()
