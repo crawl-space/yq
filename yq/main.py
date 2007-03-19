@@ -12,18 +12,6 @@ from yq.command import push
 from yq.command import top
 
 
-def main(argv):
-    c = Yq()
-    try:
-        ret = c.parse(argv)
-    except SystemError, e:
-        sys.stderr.write('yq: error: %s\n' % e.args)
-        return 255
-
-    if ret is None:
-        return 0
-    return ret
-
 class Yq(command.Command):
     usage = "%prog %command"
     description = """yq is quilt for packages."""
@@ -40,3 +28,16 @@ class Yq(command.Command):
         if options.version:
             print "0.0.1"
             sys.exit(0)
+
+
+def main(argv):
+    c = Yq()
+    try:
+        ret = c.parse(argv)
+    except SystemError, e:
+        sys.stderr.write('yq: error: %s\n' % e.args)
+        return 255
+
+    if ret is None:
+        return 0
+    return ret
