@@ -31,7 +31,7 @@ class Pop(command.Command):
                 assert False, "corrupt transaction file"
 
             if parts[2] == 'None':
-                parts[2] = 0
+                parts[2] = None
             fn(name=parts[1], epoch=parts[2], version=parts[3],
                     release=parts[4], arch=parts[5])
 
