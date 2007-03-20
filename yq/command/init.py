@@ -14,7 +14,11 @@ class Init(command.Command):
         import rpm
 
         os.mkdir("/var/lib/yq")
+
         series = open("/var/lib/yq/series", 'w')
+        series.close()
+
+        series = open("/var/lib/yq/status", 'w')
         series.close()
 
         base = open("/var/lib/yq/base", 'w')
