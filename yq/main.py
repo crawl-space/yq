@@ -13,6 +13,7 @@ from yq.command import top
 from yq.command import helpcmd
 from yq.command import series
 from yq.command import applied
+from yq.command import show
 
 
 class Yq(command.Command):
@@ -20,7 +21,8 @@ class Yq(command.Command):
     description = """yq is quilt for packages."""
 
     subCommandClasses = [init.Init, new.New, refresh.Refresh, pop.Pop,
-            push.Push, top.Top, helpcmd.Help, series.Series, applied.Applied]
+            push.Push, top.Top, helpcmd.Help, series.Series, applied.Applied,
+            show.Show]
 
     def addOptions(self):
         self.parser.add_option('', '--version',
