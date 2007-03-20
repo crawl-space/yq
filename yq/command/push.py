@@ -25,10 +25,12 @@ class Push(command.Command):
         if not top_transaction:
             transaction_name = series.readline().strip()
         else:
-            for line in series:
+            line = series.readline()
+            while line:
                 if line == top_transaction:
                     transaction_name = series.readline().strip()
                     break
+                line = series.readline()
         series.close()
         
         transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'r')
