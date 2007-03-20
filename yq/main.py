@@ -14,6 +14,7 @@ from yq.command import helpcmd
 from yq.command import series
 from yq.command import applied
 from yq.command import show
+from yq.command import next
 
 
 class Yq(command.Command):
@@ -22,7 +23,7 @@ class Yq(command.Command):
 
     subCommandClasses = [init.Init, new.New, refresh.Refresh, pop.Pop,
             push.Push, top.Top, helpcmd.Help, series.Series, applied.Applied,
-            show.Show]
+            show.Show, next.Next]
 
     def addOptions(self):
         self.parser.add_option('', '--version',
