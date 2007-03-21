@@ -25,7 +25,7 @@ class Next(command.Command):
                     transaction_name = series.readline().strip()
                     break
                 line = series.readline()
-            else:
+            if not transaction_name:
                 print "no unapplied transactions"
                 return
         series.close()
