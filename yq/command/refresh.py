@@ -25,8 +25,23 @@ class Refresh(command.Command):
         base_pkgs = base.readlines()
 
         status = open("/var/lib/yq/status", 'r')
-        for line in status: pass
-        transaction_name = line.strip()
+        status_lines = status.readlines()
+        for line in status_lines[:-1]:
+            transaction_name = line.strip()
+            transaction = open(os.path.join("/var/lib/yq/", transaction_name),
+                    'r')
+            for change in transaction:
+                if change[0] == '-':
+                    base_pkgs.remove(change[2:])
+                elif change[0] == '+':
+                    base_pkgs.append(change[2:])
+                else:
+                    assert False, "bad transaction file"
+        
+        base_pkgs.sort() 
+        current_pkgs.sort() 
+        
+        transaction_name = status_lines[-1].strip()
         transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'w')
 
         d = difflib.Differ()
