@@ -15,6 +15,7 @@ class Prev(command.Command):
         if not transaction:
             print "no transactions on the stack"
         else:
+            prev_transaction = None
             for line in status:
                 prev_transaction = transaction
                 transaction = line
