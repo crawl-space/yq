@@ -24,8 +24,8 @@ class Refresh(command.Command):
         base = open("/var/lib/yq/base", 'r')
         base_pkgs = base.readlines()
 
-        series = open("/var/lib/yq/status", 'r')
-        for line in series: pass
+        status = open("/var/lib/yq/status", 'r')
+        for line in status: pass
         transaction_name = line.strip()
         transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'w')
 
