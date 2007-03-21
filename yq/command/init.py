@@ -13,7 +13,20 @@ class Init(command.Command):
         import os
         import rpm
 
-        os.mkdir("/var/lib/yq")
+        try:
+            os.mkdir("/var/lib/yq")
+        except OSError, e:
+            if e.errno == 17:
+                # the directory already exists. we can ignore this
+                pass
+            else:
+                raise
+
+        if os.path.exists("/var/lib/yq/series") or \
+                os.path.exists("/var/lib/yq/status") or \
+                os.path.exists("/var/lib/yq/base"):
+            print "yq data already exists"
+            return 255
 
         series = open("/var/lib/yq/series", 'w')
         series.close()
