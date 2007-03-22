@@ -6,7 +6,7 @@ import sys
 try:
     from yq.main import main
 except ImportError, e:
-    print "fatal: unable to import yq" % e
+    print "fatal: unable to import yq"
     print e
     sys.exit(255)
 
