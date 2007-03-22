@@ -4,10 +4,10 @@
 import sys
 
 try:
-    sys.path.append("/usr/share/yq")
     from yq.main import main
 except ImportError, e:
-    print "fatal: unable to import yq\n%s" % e
+    print "fatal: unable to import yq" % e
+    print e
     sys.exit(255)
 
 main(sys.argv[1:])
