@@ -3,6 +3,7 @@
 import sys
 
 from yq.util import command
+from yq.util import config
 
 from yq.command import init
 from yq.command import new
@@ -34,7 +35,7 @@ class Yq(command.Command):
 
     def handleOptions(self, options):
         if options.version:
-            print "0.0.2"
+            print config.VERSION
             sys.exit(0)
 
 
