@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Top(command.Command):
     summary = "print the name of the current transaction"
@@ -10,7 +11,7 @@ class Top(command.Command):
 
     def do(self, args):
         transaction = None
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         for line in status:
             transaction = line
         if transaction:
