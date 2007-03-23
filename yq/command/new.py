@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class New(command.Command):
     summary = "create a new transaction"
@@ -19,13 +20,13 @@ class New(command.Command):
 
         transaction = args[0]
 
-        series = open("/var/lib/yq/series", 'a')
+        series = open(config.SERIES, 'a')
         print >> series, transaction
         series.close()
 
-        status = open("/var/lib/yq/status", 'a')
+        status = open(config.STATUS, 'a')
         print >> status, transaction
         status.close()
 
-        transaction_file = open(os.path.join("/var/lib/yq/", transaction), 'w')
+        transaction_file = open(config.STACKDIR, transaction, 'w')
         transaction_file.close()
