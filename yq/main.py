@@ -34,7 +34,7 @@ class Yq(command.Command):
 
     def handleOptions(self, options):
         if options.version:
-            print "0.0.1"
+            print "0.0.2"
             sys.exit(0)
 
 

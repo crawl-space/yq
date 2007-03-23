@@ -1,5 +1,5 @@
 dnl initialize autoconf
-AC_INIT(yq, 0.0.1,
+AC_INIT(yq, 0.0.2,
    http://dangerouslyinc.com,
    yq)
 
