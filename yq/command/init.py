@@ -40,6 +40,7 @@ class Init(command.Command):
         mi = ts.dbMatch()
 
         for pkg in mi:
-            print >> base, "%s %s %s %s %s" % (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'], pkg['arch'])
+            print >> base, "%s %s %s %s %s" % (pkg['name'], pkg['epoch'],
+                    pkg['version'], pkg['release'], pkg['arch'])
 
         base.close()

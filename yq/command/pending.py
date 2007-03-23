@@ -19,7 +19,9 @@ class Pending(command.Command):
 
         current_pkgs = []
         for pkg in mi:
-            current_pkgs.append("%s %s %s %s %s\n" % (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'], pkg['arch']))
+            current_pkgs.append("%s %s %s %s %s\n" %
+                    (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'],
+                        pkg['arch']))
 
         base = open("/var/lib/yq/base", 'r')
         base_pkgs = base.readlines()
