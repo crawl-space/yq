@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Init(command.Command):
     summary = "initialize the yq data"
@@ -14,7 +15,7 @@ class Init(command.Command):
         import rpm
 
         try:
-            os.mkdir("/var/lib/yq")
+            os.mkdir(config.STACKDIR)
         except OSError, e:
             if e.errno == 17:
                 # the directory already exists. we can ignore this
@@ -22,19 +23,19 @@ class Init(command.Command):
             else:
                 raise
 
-        if os.path.exists("/var/lib/yq/series") or \
-                os.path.exists("/var/lib/yq/status") or \
-                os.path.exists("/var/lib/yq/base"):
+        if os.path.exists(config.SERIES) or \
+                os.path.exists(config.STATUS) or \
+                os.path.exists(config.BASE):
             print "yq data already exists"
             return 255
 
-        series = open("/var/lib/yq/series", 'w')
+        series = open(config.SERIES, 'w')
         series.close()
 
-        series = open("/var/lib/yq/status", 'w')
-        series.close()
+        status = open(config.STATUS, 'w')
+        status.close()
 
-        base = open("/var/lib/yq/base", 'w')
+        base = open(config.BASE, 'w')
 
         ts = rpm.TransactionSet()
         mi = ts.dbMatch()
