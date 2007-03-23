@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Next(command.Command):
     summary = "print the name of the next transaction"
@@ -10,12 +11,12 @@ class Next(command.Command):
 
     def do(self, args):
         top_transaction = None
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         for line in status:
             top_transaction = line
         status.close()
 
-        series = open("/var/lib/yq/series", 'r')
+        series = open(config.STATUS, 'r')
         if not top_transaction:
             transaction_name = series.readline().strip()
         else:
