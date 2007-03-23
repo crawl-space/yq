@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Pending(command.Command):
     summary = "print pending changes to the transaction"
@@ -23,14 +24,14 @@ class Pending(command.Command):
                     (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'],
                         pkg['arch']))
 
-        base = open("/var/lib/yq/base", 'r')
+        base = open(config.BASE, 'r')
         base_pkgs = base.readlines()
 
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         status_lines = status.readlines()
         for line in status_lines[:-1]:
             transaction_name = line.strip()
-            transaction = open(os.path.join("/var/lib/yq/", transaction_name),
+            transaction = open(os.path.join(config.STACKDIR, transaction_name),
                     'r')
             for change in transaction:
                 if change[0] == '-':
