@@ -1,4 +1,4 @@
-yqdir = $(PYTHONLIBDIR)/yq/util
+yqdir = $(PYTHONLIBDIR)/yq/command
 
 yq_PYTHON = \
 	__init__.py \
