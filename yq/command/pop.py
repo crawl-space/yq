@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Pop(command.Command):
     summary = "pop a transaction off the stack"
@@ -14,11 +15,12 @@ class Pop(command.Command):
         from yum import YumBase
 
         my_yum = YumBase()
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         for line in status: pass
         status.close()
         transaction_name = line.strip()
-        transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'r')
+        transaction = open(os.path.join(config.STACKDIR, transaction_name),
+                'r')
 
         for line in transaction:
             line = line.strip()
@@ -57,10 +59,10 @@ class Pop(command.Command):
 
         #Remove from the series
         #yes, this will eat files and babies
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         lines = status.readlines()
         status.close()
-        status = open("/var/lib/yq/status", 'w')
+        status = open(config.STATUS, 'w')
         for line in lines[:-1]:
             status.write(line)
         status.close()
