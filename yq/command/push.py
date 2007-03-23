@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Push(command.Command):
     summary = "push a transaction onto the stack"
@@ -16,12 +17,12 @@ class Push(command.Command):
         my_yum = YumBase()
 
         top_transaction = None
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         for line in status:
             top_transaction = line
         status.close()
 
-        series = open("/var/lib/yq/series", 'r')
+        series = open(config.SERIES, 'r')
         if not top_transaction:
             transaction_name = series.readline().strip()
         else:
@@ -33,7 +34,7 @@ class Push(command.Command):
                 line = series.readline()
         series.close()
         
-        transaction = open(os.path.join("/var/lib/yq/", transaction_name), 'r')
+        transaction = open(os.path.join(config.STACKDIR, transaction_name), 'r')
 
         for line in transaction:
             line = line.strip()
@@ -72,6 +73,6 @@ class Push(command.Command):
 
         #Remove from the series
         #yes, this will eat files and babies
-        status = open("/var/lib/yq/status", 'a')
+        status = open(config.STATUS, 'a')
         print >> status, transaction_name
         status.close()
