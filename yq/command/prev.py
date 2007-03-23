@@ -1,6 +1,7 @@
 # vi:si:et:sw=4:sts=4:ts=4
 
 from yq.util import command
+from yq.util import config
 
 class Prev(command.Command):
     summary = "print the name of the previous transaction on the stack"
@@ -10,7 +11,7 @@ class Prev(command.Command):
 
     def do(self, args):
         transaction = None
-        status = open("/var/lib/yq/status", 'r')
+        status = open(config.STATUS, 'r')
         transaction = status.readline()
         if not transaction:
             print "no transactions on the stack"
