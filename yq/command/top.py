@@ -10,6 +10,7 @@ class Top(command.Command):
         self.options = options
 
     def do(self, args):
+        from yq import stack
         transaction = stack.top()
         if transaction:
             print transaction
