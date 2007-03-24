@@ -13,16 +13,9 @@ class Refresh(command.Command):
     def do(self, args):
         import difflib
         import os
-        import rpm
+        from yq.backend import yumbackend
 
-        ts = rpm.TransactionSet()
-        mi = ts.dbMatch()
-
-        current_pkgs = []
-        for pkg in mi:
-            current_pkgs.append("%s %s %s %s %s\n" %
-                    (pkg['name'], pkg['epoch'], pkg['version'], pkg['release'],
-                        pkg['arch']))
+        current_pkgs = yumbackend.list_installed()
 
         base = open(config.BASE, 'r')
         base_pkgs = base.readlines()
