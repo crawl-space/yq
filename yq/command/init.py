@@ -12,7 +12,7 @@ class Init(command.Command):
 
     def do(self, args):
         import os
-        import rpm
+        from yq.backend import yumbackend
 
         try:
             os.mkdir(config.STACKDIR)
@@ -35,13 +35,7 @@ class Init(command.Command):
         status = open(config.STATUS, 'w')
         status.close()
 
+        installed = yumbackend.list_installed()
         base = open(config.BASE, 'w')
-
-        ts = rpm.TransactionSet()
-        mi = ts.dbMatch()
-
-        for pkg in mi:
-            print >> base, "%s %s %s %s %s" % (pkg['name'], pkg['epoch'],
-                    pkg['version'], pkg['release'], pkg['arch'])
-
+        base.writelines(installed)
         base.close()
