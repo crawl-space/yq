@@ -12,19 +12,14 @@ class Show(command.Command):
 
     def do(self, args):
         import os
+        from yq import stack
 
         if len(args) == 0:
-            top_transaction = None
-            status = open(config.STATUS, 'r')
-            for line in status:
-                top_transaction = line
-            status.close()
+            transaction_name = stack.top()
 
-            if not top_transaction:
+            if not transaction_name:
                 print "no applied transactions"
                 return 0
-            else:
-                transaction_name = top_transaction.strip()
         else:
             transaction_name = args[0]
 
