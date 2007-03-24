@@ -2,6 +2,19 @@
 
 from yq.util import config
 
+
+def list_installed():
+    import rpm
+
+    ts = rpm.TransactionSet()
+    mi = ts.dbMatch()
+
+    current_pkgs = []
+    for pkg in mi:
+        current_pkgs.append("%s %s %s %s %s\n" % (pkg['name'], pkg['epoch'],
+            pkg['version'], pkg['release'], pkg['arch']))
+    return current_pkgs
+
 def push(transaction_name):
     _run_transaction(transaction_name, '+', '-')
 
