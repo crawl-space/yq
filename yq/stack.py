@@ -11,3 +11,21 @@ def top():
     if top:
         top = top.strip()
     return top
+
+def next():
+    top_transaction = top()
+
+    series = open(config.SERIES, 'r')
+    if not top_transaction:
+        transaction_name = series.readline().strip()
+    else:
+        transaction_name = None
+        line = series.readline()
+        while line:
+            if line.strip() == top_transaction:
+                transaction_name = series.readline().strip()
+                break
+            line = series.readline()
+    series.close()
+
+    return transaction_name
