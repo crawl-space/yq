@@ -10,11 +10,8 @@ class Next(command.Command):
         self.options = options
 
     def do(self, args):
-        top_transaction = None
-        status = open(config.STATUS, 'r')
-        for line in status:
-            top_transaction = line
-        status.close()
+        from yq import stack
+        top_transaction = stack.top()
 
         series = open(config.STATUS, 'r')
         if not top_transaction:
@@ -22,7 +19,7 @@ class Next(command.Command):
         else:
             line = series.readline()
             while line:
-                if line == top_transaction:
+                if line.strip() == top_transaction:
                     transaction_name = series.readline().strip()
                     break
                 line = series.readline()
