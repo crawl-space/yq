@@ -11,8 +11,8 @@ class Series(command.Command):
 
     def do(self, args):
         transaction = None
-        status = open(config.SERIES, 'r')
-        for line in status:
+        series = open(config.SERIES, 'r')
+        for line in series:
             transaction = line
             print transaction.strip()
         if not transaction:
