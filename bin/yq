@@ -6,8 +6,8 @@ import sys
 try:
     from yq.main import main
 except ImportError, e:
-    print "fatal: unable to import yq"
-    print e
+    print >> sys.stderr, "fatal: unable to import yq"
+    print >> sys.stderr, e
     sys.exit(255)
 
 main(sys.argv[1:])
