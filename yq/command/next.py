@@ -13,19 +13,20 @@ class Next(command.Command):
         from yq import stack
         top_transaction = stack.top()
 
-        series = open(config.STATUS, 'r')
+        series = open(config.SERIES, 'r')
         if not top_transaction:
             transaction_name = series.readline().strip()
         else:
+            transaction_name = None
             line = series.readline()
             while line:
                 if line.strip() == top_transaction:
                     transaction_name = series.readline().strip()
                     break
                 line = series.readline()
-            if not transaction_name:
-                print "no unapplied transactions"
-                return
         series.close()
 
-        print transaction_name
+        if not transaction_name:
+            print "no unapplied transactions"
+        else:
+            print transaction_name
