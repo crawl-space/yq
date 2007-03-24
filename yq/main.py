@@ -35,7 +35,7 @@ class Yq(command.Command):
 
     def handleOptions(self, options):
         if options.version:
-            print config.VERSION
+            print >> self.stdout, config.VERSION
             sys.exit(0)
 
 
