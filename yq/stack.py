@@ -4,8 +4,10 @@ from yq.util import config
 
 
 def top():
+    top = None
     status = open(config.STATUS, 'r')
-    for line in status: pass
-    status.close()
-    transaction_name = line.strip()
-    return transaction_name
+    for line in status:
+        top = line
+    if top:
+        top = top.strip()
+    return top

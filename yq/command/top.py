@@ -10,11 +10,8 @@ class Top(command.Command):
         self.options = options
 
     def do(self, args):
-        transaction = None
-        status = open(config.STATUS, 'r')
-        for line in status:
-            transaction = line
+        transaction = stack.top()
         if transaction:
-            print transaction.strip()
+            print transaction
         else:
             print "no transactions on the stack"
