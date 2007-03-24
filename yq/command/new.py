@@ -28,5 +28,6 @@ class New(command.Command):
         print >> status, transaction
         status.close()
 
-        transaction_file = open(config.STACKDIR, transaction, 'w')
+        transaction_file = open(os.path.join(config.STACKDIR, transaction),
+                'w')
         transaction_file.close()
