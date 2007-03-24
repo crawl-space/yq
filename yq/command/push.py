@@ -56,8 +56,7 @@ class Push(command.Command):
         cb.tsInfo = my_yum.tsInfo
         my_yum.runTransaction(cb)
 
-        #Remove from the series
-        #yes, this will eat files and babies
+        # add to the status
         status = open(config.STATUS, 'a')
         print >> status, transaction_name
         status.close()
