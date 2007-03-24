@@ -3,6 +3,12 @@
 from yq.util import config
 
 def push(transaction_name):
+    _run_transaction(transaction_name, '+', '-')
+
+def pop(transaction_name):
+    _run_transaction(transaction_name, '-', '+')
+
+def _run_transaction(transaction_name, install_mode, remove_mode):
     import os
     from yum import YumBase
 
@@ -14,10 +20,10 @@ def push(transaction_name):
     for line in transaction:
         line = line.strip()
         parts = line.split(' ')
-        if parts[0] == '-':
-            fn = my_yum.remove
-        elif parts[0] == '+':
+        if parts[0] == install_mode:
             fn = my_yum.install
+        elif parts[0] == remove_mode:
+            fn = my_yum.remove
         else:
             assert False, "corrupt transaction file"
 
@@ -45,4 +51,3 @@ def push(transaction_name):
     cb.filelog = True
     cb.tsInfo = my_yum.tsInfo
     my_yum.runTransaction(cb)
-
