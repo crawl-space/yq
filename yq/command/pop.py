@@ -13,12 +13,10 @@ class Pop(command.Command):
     def do(self, args):
         import os
         from yum import YumBase
+        from yq import stack
 
         my_yum = YumBase()
-        status = open(config.STATUS, 'r')
-        for line in status: pass
-        status.close()
-        transaction_name = line.strip()
+        transaction_name = stack.top()
         transaction = open(os.path.join(config.STACKDIR, transaction_name),
                 'r')
 
