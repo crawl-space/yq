@@ -1,4 +1,5 @@
 SUBDIRS = \
+	backend \
 	command \
 	util
 
