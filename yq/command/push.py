@@ -17,21 +17,9 @@ class Push(command.Command):
 
         my_yum = YumBase()
 
-        top_transaction = stack.top()
-
-        series = open(config.SERIES, 'r')
-        if not top_transaction:
-            transaction_name = series.readline().strip()
-        else:
-            line = series.readline()
-            while line:
-                if line.strip() == top_transaction:
-                    transaction_name = series.readline().strip()
-                    break
-                line = series.readline()
-        series.close()
-        
-        transaction = open(os.path.join(config.STACKDIR, transaction_name), 'r')
+        transaction_name = stack.next()
+        transaction = open(os.path.join(config.STACKDIR, transaction_name),
+                'r')
 
         for line in transaction:
             line = line.strip()
