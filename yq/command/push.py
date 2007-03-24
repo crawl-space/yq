@@ -13,14 +13,11 @@ class Push(command.Command):
     def do(self, args):
         import os
         from yum import YumBase
+        from yq import stack
 
         my_yum = YumBase()
 
-        top_transaction = None
-        status = open(config.STATUS, 'r')
-        for line in status:
-            top_transaction = line
-        status.close()
+        top_transaction = stack.top()
 
         series = open(config.SERIES, 'r')
         if not top_transaction:
@@ -28,7 +25,7 @@ class Push(command.Command):
         else:
             line = series.readline()
             while line:
-                if line == top_transaction:
+                if line.strip() == top_transaction:
                     transaction_name = series.readline().strip()
                     break
                 line = series.readline()
