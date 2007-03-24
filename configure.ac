@@ -28,6 +28,7 @@ AC_OUTPUT(
 Makefile
 bin/Makefile
 yq/Makefile
+yq/backend/Makefile
 yq/command/Makefile
 yq/util/Makefile
 )
