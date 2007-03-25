@@ -6,8 +6,8 @@ SUBDIRS = \
 	yq
 
 release: dist
-	make $(PACKAGE)-$(VERSION).tar.bz2.md5
+	make $(PACKAGE)-$(VERSION).tar.bz2.sha1
 
 # generate md5 sum files
-%.md5: %
-	md5sum $< > $@
+%.sha1: %
+	sha1sum $< > $@

@@ -2,6 +2,9 @@
 *.pyo
 .*.sw?
 
+*.bz2
+*.bz2.sha1
+
 Makefile
 Makefile.in
 
