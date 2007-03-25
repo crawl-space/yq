@@ -14,6 +14,6 @@ class Applied(command.Command):
         status = open(config.STATUS, 'r')
         for line in status:
             transaction = line
-            print transaction.strip()
+            self.stdout.write(transaction)
         if not transaction:
-            print "no transactions on the stack"
+            self.stdout.write("no transactions on the stack\n")
