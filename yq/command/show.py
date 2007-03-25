@@ -18,14 +18,11 @@ class Show(command.Command):
             transaction_name = stack.top()
 
             if not transaction_name:
-                print "no applied transactions"
+                self.stdout.write("no applied transactions\n")
                 return 0
         else:
             transaction_name = args[0]
 
         transaction = open(os.path.join(config.STACKDIR, transaction_name),
                 'r')
-
-        for line in transaction:
-            line = line.strip()
-            print line
+        self.stdout.writelines(transaction)
