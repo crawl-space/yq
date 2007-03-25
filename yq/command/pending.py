@@ -40,6 +40,6 @@ class Pending(command.Command):
         d = difflib.Differ()
         for line in d.compare(base_pkgs, current_pkgs):
             if line[0] in ('-', '+'):
-                print line.strip()
+                self.stdout.write(line)
 
         base.close()
