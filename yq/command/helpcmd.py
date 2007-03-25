@@ -21,4 +21,4 @@ class Help(command.Command):
                 if command in parent.aliasedSubCommands.keys():
                     parent.aliasedSubCommands[command].parser.print_help()
             else:
-                print "unknown command '%s'" % command
+                self.stdout.write("unknown command '%s'\n" % command)
