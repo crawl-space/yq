@@ -13,6 +13,6 @@ class Top(command.Command):
         from yq import stack
         transaction = stack.top()
         if transaction:
-            print transaction
+            self.stdout.write(transaction + '\n')
         else:
-            print "no transactions on the stack"
+            self.stdout.write("no transactions on the stack\n")
