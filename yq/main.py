@@ -29,9 +29,8 @@ class Yq(command.Command):
             show.Show, next.Next, prev.Prev, pending.Pending]
 
     def addOptions(self):
-        self.parser.add_option('', '--version',
-                          action="store_true", dest="version",
-                          help="show version information")
+        self.parser.add_option('', '--version', action="store_true",
+                help="show version information")
 
     def handleOptions(self, options):
         if options.version:
