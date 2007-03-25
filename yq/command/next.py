@@ -14,6 +14,6 @@ class Next(command.Command):
         transaction_name = stack.next()
 
         if not transaction_name:
-            print "no unapplied transactions"
+            self.stdout.write("no unapplied transactions\n")
         else:
-            print transaction_name
+            self.stdout.write(transaction_name + '\n')
