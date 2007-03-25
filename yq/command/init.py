@@ -24,13 +24,19 @@ class Init(command.Command):
             if e.errno == 17:
                 # the directory already exists. we can ignore this
                 pass
+            elif e.errno == 13:
+                die("can't create %s" % config.STACKDIR)
             else:
                 raise
 
         if self.options.force:
-            os.unlink(config.SERIES)
-            os.unlink(config.STATUS)
-            os.unlink(config.BASE)
+            try:
+                os.unlink(config.SERIES)
+                os.unlink(config.STATUS)
+                os.unlink(config.BASE)
+            except OSError, e:
+                if e.errno == 13:
+                    die("can't remove %s" % e.filename)
         elif os.path.exists(config.SERIES) or \
                 os.path.exists(config.STATUS) or \
                 os.path.exists(config.BASE):
@@ -47,3 +53,8 @@ class Init(command.Command):
         base = open(config.BASE, 'w')
         base.writelines(installed)
         base.close()
+
+def die(msg):
+    import sys
+    print >> sys.stderr, "error: %s" % msg
+    sys.exit(255)
