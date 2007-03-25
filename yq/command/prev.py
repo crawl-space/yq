@@ -14,13 +14,13 @@ class Prev(command.Command):
         status = open(config.STATUS, 'r')
         transaction = status.readline()
         if not transaction:
-            print "no transactions on the stack"
+            self.stdout.write("no transactions on the stack\n")
         else:
             prev_transaction = None
             for line in status:
                 prev_transaction = transaction
                 transaction = line
             if prev_transaction:
-                print prev_transaction.strip()
+                self.stdout.write(prev_transaction)
             else:
-                print "only one transaction on the stack"
+                self.stdout.write("only one transaction on the stack\n")
