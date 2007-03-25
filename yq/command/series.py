@@ -14,6 +14,6 @@ class Series(command.Command):
         series = open(config.SERIES, 'r')
         for line in series:
             transaction = line
-            print transaction.strip()
+            self.stdout.write(transaction)
         if not transaction:
-            print "no transactions in the series"
+            self.stdout.write("no transactions in the series\n")
