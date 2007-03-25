@@ -7,6 +7,10 @@ class Init(command.Command):
     summary = "initialize the yq data"
     description = """This command will create the files and directories needed by yq."""
 
+    def addOptions(self):
+        self.parser.add_option('-f', '--force', action="store_true",
+                help="initialize data even if it already exists")
+
     def handleOptions(self, options):
         self.options = options
 
@@ -23,7 +27,11 @@ class Init(command.Command):
             else:
                 raise
 
-        if os.path.exists(config.SERIES) or \
+        if self.options.force:
+            os.unlink(config.SERIES)
+            os.unlink(config.STATUS)
+            os.unlink(config.BASE)
+        elif os.path.exists(config.SERIES) or \
                 os.path.exists(config.STATUS) or \
                 os.path.exists(config.BASE):
             print "yq data already exists"
