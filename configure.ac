@@ -31,4 +31,5 @@ yq/Makefile
 yq/backend/Makefile
 yq/command/Makefile
 yq/util/Makefile
+yq/util/config.py
 )
